@@ -48,18 +48,16 @@ nav {
     display: flex; 
     overflow-x: auto;
     border-top: 1px solid var(--border-color);
-    padding: 0 5px; /* Memberi sedikit padding horizontal untuk menu */
+    padding: 0 5px;
 }
 
-/* Menyembunyikan scrollbar navigasi tapi tetap bisa di-scroll */
 nav::-webkit-scrollbar {
     display: none;
 }
 nav {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
-
 
 nav a { 
     padding: 15px; 
@@ -104,6 +102,8 @@ main {
     text-decoration: none;
     color: var(--text-color);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex; /* Tambahan untuk layout yang lebih baik */
+    flex-direction: column; /* Tambahan */
 }
 
 .product-card:hover {
@@ -111,20 +111,27 @@ main {
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
+/* ===== PERUBAHAN UTAMA DI SINI ===== */
 .product-image {
     width: 100%;
     height: 180px;
-    object-fit: cover;
+    object-fit: contain; /* Diubah dari 'cover' menjadi 'contain' */
+    background-color: #fff; /* Memberi background putih jika ada ruang sisa */
 }
 
 .product-info {
     padding: 10px;
+    flex-grow: 1; /* Tambahan agar info produk mengisi sisa ruang */
+    display: flex; /* Tambahan */
+    flex-direction: column; /* Tambahan */
+    justify-content: space-between; /* Tambahan */
 }
+/* ==================================== */
 
 .product-title {
     font-size: 14px;
     line-height: 1.3;
-    height: 36px; /* Batasi 2 baris */
+    height: 36px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -137,6 +144,7 @@ main {
     font-size: 16px;
     font-weight: bold;
     color: var(--primary-color);
+    margin-top: auto; /* Tambahan agar harga selalu di bawah */
 }
 
 /* Loader */
@@ -147,3 +155,31 @@ main {
     font-size: 18px;
     color: #888;
 }
+
+
+/* ===== BLOK BARU UNTUK TAMPILAN HP ===== */
+@media (max-width: 600px) {
+    
+    main {
+        padding: 10px;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 8px;
+    }
+    
+    .product-image {
+        height: 150px; /* Tinggi gambar disesuaikan untuk HP */
+    }
+
+    .site-title {
+        font-size: 20px;
+    }
+
+    .site-logo {
+        height: 35px;
+        margin-right: 8px;
+    }
+}
+/* ========================================= */
